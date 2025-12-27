@@ -17,10 +17,7 @@ def model_train(model, train_loader, optimizer, criterion, device, feature_maski
         try:
             # Unpack batch (adjust according to actual data structure)
             esmc, dssp, b, sf, mask, labels = batch
-            # b = -torch.log(b + 1.0)
-            # b = torch.log(b + 1.0)
             b = -torch.log10(b + 1.0)
-            # b = torch.log10(b + 1.0)
             
             # Move data to device
             esmc, dssp, b, sf, mask, labels = (
@@ -71,11 +68,8 @@ def model_validate(model, val_loader, criterion, device, feature_masking=False):
         for batch in val_loader:
             try:
                 esmc, dssp, b, sf, mask, labels = batch
-                # b = -torch.log(b + 1.0)
-                # b = torch.log(b + 1.0)
                 b = -torch.log10(b + 1.0)
-                # b = torch.log10(b + 1.0)
-                
+
                 esmc, dssp, b, sf, mask, labels = (
                     esmc.to(device), 
                     dssp.to(device), 
